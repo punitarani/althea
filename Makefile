@@ -3,6 +3,9 @@
 # List of directories and files to format and ruff
 TARGETS = **.py
 
+run:
+	poetry run reflex run
+
 format:
 	poetry run isort $(TARGETS)
 	poetry run black $(TARGETS)
