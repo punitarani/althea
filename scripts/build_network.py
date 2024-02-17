@@ -10,7 +10,7 @@ print(f"Building network for work: {EID}")
 
 res = asyncio.run(
     build_network_around_work(
-        entity_id=EID, depth=3, citations_limit=10, references_limit=100
+        entity_id=EID, depth=3, citations_limit=10, references_limit=10
     )
 )
 print(res)
