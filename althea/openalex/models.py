@@ -3,7 +3,7 @@
 from datetime import date, datetime
 from typing import Optional, Union
 
-from pydantic import BaseModel, HttpUrl
+from pydantic import BaseModel, HttpUrl, validator
 
 # fmt: off
 WorkID = str
@@ -26,6 +26,8 @@ PMCID = str
 
 WwwUrl = str
 WebUrl = Union[HttpUrl, WwwUrl]
+
+
 # fmt: on
 
 
@@ -226,3 +228,12 @@ class WorkOpenAccess(BaseModel):
     is_oa: Optional[bool] = None
     oa_status: Optional[str] = None
     oa_url: Optional[HttpUrl] = None
+
+    @validator("oa_url", pre=True, always=True)
+    def validate_oa_url(cls, v, values, config, field):  # noqa
+        if v is None:
+            return v
+        try:
+            return HttpUrl(v, scheme="https")
+        except ValueError:
+            return None
