@@ -139,6 +139,15 @@ class OpenAccess(BaseModel):
     oa_url: Optional[HttpUrl] = None
     any_repository_has_fulltext: Optional[bool] = None
 
+    @validator("oa_url", pre=True, always=True)
+    def validate_oa_url(cls, v, values, config, field):  # noqa
+        if v is None:
+            return v
+        try:
+            return HttpUrl(v, scheme="https")
+        except ValueError:
+            return None
+
 
 class MeshTag(BaseModel):
     """MeSH tag of a paper"""
