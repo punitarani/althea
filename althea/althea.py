@@ -1,35 +1,26 @@
-"""althea/althea.py"""
-
 import reflex as rx
 
-from rxconfig import config
-
-docs_url = "https://reflex.dev/docs/getting-started/introduction"
-filename = f"{config.app_name}/{config.app_name}.py"
-
-
-class State(rx.State):
-    """The app state."""
+from althea import styles
+from althea.components import chat, modal, navbar, sidebar
+from althea.state import State  # noqa
 
 
 def index() -> rx.Component:
-    return rx.center(
-        rx.theme_panel(),
-        rx.vstack(
-            rx.heading("Welcome to Reflex!", size="9"),
-            rx.text("Get started by editing ", rx.code(filename)),
-            rx.button(
-                "Check out our docs!",
-                on_click=lambda: rx.redirect(docs_url),
-                size="4",
-            ),
-            align="center",
-            spacing="7",
-            font_size="2em",
-        ),
-        height="100vh",
+    """The main app."""
+    return rx.chakra.vstack(
+        navbar(),
+        chat.chat(),
+        chat.action_bar(),
+        sidebar(),
+        modal(),
+        bg=styles.bg_dark_color,
+        color=styles.text_light_color,
+        min_h="100vh",
+        align_items="stretch",
+        spacing="0",
     )
 
 
-app = rx.App()
+# Add state and page to the app.
+app = rx.App(style=styles.base_style)
 app.add_page(index)
