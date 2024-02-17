@@ -87,6 +87,7 @@ async def download_paper(doi: str) -> Path | None:
 
     # If the file already exists, return it
     if filepath.exists():
+        print(f"Paper already downloaded: {doi}")
         return filepath
 
     url = await get_paper_url(doi)
@@ -94,12 +95,16 @@ async def download_paper(doi: str) -> Path | None:
         return None
 
     # Download the file
-    async with httpx.AsyncClient() as client:
-        response = await client.get(url, follow_redirects=True)
-        if response.status_code == 200:
-            with open(filepath, "wb") as f:
-                f.write(response.content)
-            return filepath
+    for i in range(3):
+        try:
+            async with httpx.AsyncClient() as client:
+                response = await client.get(url, follow_redirects=True)
+                if response.status_code == 200:
+                    with open(filepath, "wb") as f:
+                        f.write(response.content)
+                    return filepath
+        except Exception:  # noqa
+            print(f"Error downloading paper: {doi}. Retry {i}")
     return None
 
 
