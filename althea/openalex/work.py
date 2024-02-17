@@ -5,7 +5,7 @@ from json import JSONDecodeError
 
 import httpx
 from aiolimiter import AsyncLimiter
-from pydantic import ValidationError
+from pydantic.error_wrappers import ValidationError
 from tenacity import (
     retry,
     retry_if_exception_type,
@@ -367,11 +367,14 @@ class Work:
             return_references = {}
             # Save only the Works within the limit to MongoDB
             for ref_id in reference_ids[:limit]:
-                reference_work = reference_works[ref_id]
-                return_references[ref_id] = reference_work
-                await self.mongo_collection_works.update_one(
-                    filter={"id": str(reference_work.id)},
-                    update={"$set": json.loads(reference_work.json())},
-                    upsert=True,
-                )
+                try:
+                    reference_work = reference_works[ref_id]
+                    return_references[ref_id] = reference_work
+                    await self.mongo_collection_works.update_one(
+                        filter={"id": str(reference_work.id)},
+                        update={"$set": json.loads(reference_work.json())},
+                        upsert=True,
+                    )
+                except KeyError:
+                    pass
             return reference_ids[:limit], return_references
