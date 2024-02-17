@@ -6,6 +6,7 @@ unpaywall API wrapper
 
 from pathlib import Path
 
+import fitz
 import httpx
 
 from althea.utils import safe_filename
@@ -89,3 +90,21 @@ async def download_paper(doi: str) -> Path | None:
                 f.write(response.content)
             return filepath
     return None
+
+
+def extract_text(fp: Path) -> str:
+    """
+    Extract text from a PDF file.
+
+    Args:
+        fp (Path): Path to the PDF file
+
+    Returns:
+        str: Extracted text from the PDF file
+    """
+    text = ""
+    with fitz.open(fp) as doc:
+        for page in doc:
+            text += page.get_text()
+
+    return text
