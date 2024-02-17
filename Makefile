@@ -1,7 +1,7 @@
 # Makefile
 
 # List of directories and files to format and ruff
-TARGETS = **.py
+TARGETS = *.py althea/
 
 run:
 	poetry run reflex run
