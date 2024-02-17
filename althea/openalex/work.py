@@ -1,5 +1,6 @@
 """althea/openalex/work.py"""
 
+import json
 from json import JSONDecodeError
 
 import httpx
@@ -116,7 +117,7 @@ class Work:
 
         # Serialize WorkObject data into a dict and save to MongoDB
         await self.mongo_collection_works.update_one(
-            update=self._data.json(), upsert=True
+            update=json.loads(self._data.json()), upsert=True
         )
 
         return self._data
@@ -229,7 +230,7 @@ class Work:
             for citation_work in citation_works.values():
                 await self.mongo_collection_works.update_one(
                     filter={"id": str(citation_work.id)},
-                    update={"$set": citation_work.json()},
+                    update={"$set": json.loads(citation_work.json())},
                     upsert=True,
                 )
 
@@ -242,7 +243,7 @@ class Work:
                 return_citations[cit_id] = citation_work
                 await self.mongo_collection_works.update_one(
                     filter={"id": str(citation_work.id)},
-                    update={"$set": citation_work.json()},
+                    update={"$set": json.loads(citation_work.json())},
                     upsert=True,
                 )
             return citation_ids[:limit], return_citations
@@ -357,7 +358,7 @@ class Work:
             for reference_work in reference_works.values():
                 await self.mongo_collection_works.update_one(
                     filter={"id": str(reference_work.id)},
-                    update={"$set": reference_work.json()},
+                    update={"$set": json.loads(reference_work.json())},
                     upsert=True,
                 )
 
@@ -370,7 +371,7 @@ class Work:
                 return_references[ref_id] = reference_work
                 await self.mongo_collection_works.update_one(
                     filter={"id": str(reference_work.id)},
-                    update={"$set": reference_work.json()},
+                    update={"$set": json.loads(reference_work.json())},
                     upsert=True,
                 )
             return reference_ids[:limit], return_references

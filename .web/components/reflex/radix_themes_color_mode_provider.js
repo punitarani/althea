@@ -6,9 +6,9 @@ import { ColorModeContext } from "/utils/context.js"
 export default function RadixThemesColorModeProvider({ children }) {
     const {theme, setTheme} = useTheme()
     const [colorMode, setColorMode] = useState("light")
-
+  
     useEffect(() => setColorMode(theme), [theme])
-
+  
     const toggleColorMode = () => {
       setTheme(theme === "light" ? "dark" : "light")
     }

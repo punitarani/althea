@@ -1,30 +1,30 @@
 """althea/openalex/models.py"""
 
 from datetime import date, datetime
-from typing import Annotated, Optional, Union
+from typing import Optional, Union
 
-from pydantic import BaseModel, ConstrainedStr, HttpUrl
+from pydantic import BaseModel, HttpUrl
 
 # fmt: off
-WorkID = Annotated[str, ConstrainedStr(pattern=r'^https://openalex\.org/W\d{4,10}$')]
+WorkID = str
 
-AuthorID = Annotated[str, ConstrainedStr(pattern=r'^https://openalex\.org/A\d{4,10}$')]
-AuthorPosition = Annotated[str, ConstrainedStr(pattern=r'^(first|middle|last)$')]
+AuthorID = str
+AuthorPosition = str
 
-InstitutionID = Annotated[str, ConstrainedStr(pattern=r'^https://openalex\.org/I\d{4,10}$')]
-OrcidID = Annotated[str, ConstrainedStr(pattern=r'^https://orcid\.org/\d{4}-\d{4}-\d{4}-\d{3}[\dX]$')]
-RorID = Annotated[str, ConstrainedStr(pattern=r'^https://ror\.org/\w{9}$')]
-RorType = Annotated[str, ConstrainedStr(pattern=r'^(education|healthcare|company|archive|nonprofit|government|facility|other)$')]
+InstitutionID = str
+OrcidID = str
+RorID = str
+RorType = str
 
-ApcProvenance = Annotated[str, ConstrainedStr(pattern=r'^(openapc|doaj)$')]
+ApcProvenance = str
 
-OALocationVersion = Annotated[str, ConstrainedStr(pattern=r'^(publishedVersion|acceptedVersion|submittedVersion)$')]
+OALocationVersion = str
 
-DOI = Annotated[str, ConstrainedStr(pattern=r'https:\/\/doi\.org\/10\.\d{4,9}\/[\S]+$')]
-PMID = Annotated[str, ConstrainedStr(pattern=r'^https://pubmed\.ncbi\.nlm\.nih\.gov/\d+$')]
-PMCID = Annotated[str, ConstrainedStr(pattern=r'^https://www\.ncbi\.nlm\.nih(\.[\S]*)?/pmc/articles/(PMC)?\d+$')]
+DOI = str
+PMID = str
+PMCID = str
 
-WwwUrl = Annotated[str, ConstrainedStr(pattern=r"^(https?:\/\/)?www\.[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-zA-Z]{2,6}\b([-a-zA-Z0-9()@:%_\+~#=]*\/?)*(\?[a-zA-Z0-9\-._~:\/?#\[\]@!$&'()*+,;=]*)?(#[a-zA-Z0-9\-._~:\/?#\[\]@!$&'()*+,;=]*)?$")]
+WwwUrl = str
 WebUrl = Union[HttpUrl, WwwUrl]
 # fmt: on
 
