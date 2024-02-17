@@ -8,6 +8,9 @@ from pydantic import BaseModel
 class Secrets(BaseModel):
     """Secrets loaded from environment variables"""
 
+    # Cohere
+    COHERE_API_KEY: str
+
     # Mongo
     MONGO_HOST: str
     MONGO_DB: str
@@ -26,6 +29,9 @@ class Secrets(BaseModel):
     @classmethod
     def load(cls) -> "Secrets":
         """Load secrets from environment variables"""
+
+        # Cohere
+        COHERE_API_KEY = os.getenv("COHERE_API_KEY")
 
         # Mongo
         MONGO_HOST = os.getenv("MONGO_HOST")
@@ -50,6 +56,7 @@ class Secrets(BaseModel):
         assert TOGETHER_API_KEY, "TOGETHER_API_KEY environment variable not set"
 
         return cls(
+            COHERE_API_KEY=COHERE_API_KEY,
             MONGO_HOST=MONGO_HOST,
             MONGO_DB=MONGO_DB,
             MONGO_USERNAME=MONGO_USERNAME,

@@ -1,8 +1,11 @@
 """althea/nlp/client.py"""
 
+import cohere
 from openai import AsyncOpenAI, OpenAI
 
 from althea import SECRETS
+
+cohere = cohere.AsyncClient(api_key=SECRETS.COHERE_API_KEY)
 
 openai = AsyncOpenAI(api_key=SECRETS.OPENAI_API_KEY)
 
