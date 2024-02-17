@@ -71,8 +71,19 @@ async def download_paper(doi: str) -> Path | None:
     Returns:
         Path | None: Path to the downloaded paper or None if not found
     """
+
+    # Handle the case where the DOI is not found
+    if doi is None:
+        return None
+
+    # Remove the prefix "https://doi.org/" from the DOI
+    if doi.startswith("https://doi.org/"):
+        doi = doi[16:]
+    elif doi.startswith("doi.org/"):
+        doi = doi[8:]
+
     filename = safe_filename(doi) + ".pdf"
-    filepath = DATA_DIR.joinpath(filename)
+    filepath = DATA_DIR.joinpath("pdf", filename)
 
     # If the file already exists, return it
     if filepath.exists():

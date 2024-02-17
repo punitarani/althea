@@ -7,6 +7,41 @@ from tqdm import tqdm
 from althea.openalex import Work
 from althea.openalex.models import WorkObject
 from althea.openalex.utils import parse_id_from_url
+from althea.unpaywall import download_paper, extract_text
+
+
+async def download_papers(works: list[str]) -> list[str]:
+    """
+    Download the papers
+
+    Args:
+        works (list[str]): List of work IDs to download
+
+    Returns:
+        list[str]: List of work IDs that were successfully downloaded
+    """
+
+    downloaded = []
+    for work_id in tqdm(works, desc="Downloading papers"):
+        work = await Work(work_id).data
+
+        fp = await download_paper(work.doi)
+
+        # Handle the case where the paper is not found
+        if fp is None:
+            continue
+
+        # Extract the text from the paper
+        text = extract_text(fp)
+
+        # Replace the pdf to txt in the file path string
+        txt_fp = str(fp).replace("pdf", "txt")
+        with open(txt_fp, "w") as f:
+            f.write(text)
+
+        downloaded.append(work_id)
+
+    return downloaded
 
 
 async def build_network_around_work(

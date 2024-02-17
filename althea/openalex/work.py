@@ -117,7 +117,9 @@ class Work:
 
         # Serialize WorkObject data into a dict and save to MongoDB
         await self.mongo_collection_works.update_one(
-            update=json.loads(self._data.json()), upsert=True
+            filter={"id": self.idx},
+            update={"$set": json.loads(self._data.json())},
+            upsert=True,
         )
 
         return self._data
