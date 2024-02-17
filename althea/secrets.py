@@ -17,6 +17,9 @@ class Secrets(BaseModel):
     MONGO_USERNAME: str
     MONGO_PASSWORD: str
 
+    # Together AI
+    TOGETHER_API_KEY: str
+
     @classmethod
     def load(cls) -> "Secrets":
         """Load secrets from environment variables"""
@@ -33,10 +36,15 @@ class Secrets(BaseModel):
         assert MONGO_USERNAME, "MONGO_USERNAME environment variable not set"
         assert MONGO_PASSWORD, "MONGO_PASSWORD environment variable not set"
 
+        # Together AI
+        TOGETHER_API_KEY = os.getenv("TOGETHER_API_KEY")
+        assert TOGETHER_API_KEY, "TOGETHER_API_KEY environment variable not set"
+
         return cls(
             OPENAI_API_KEY=OPENAI_API_KEY,
             MONGO_HOST=MONGO_HOST,
             MONGO_DB=MONGO_DB,
             MONGO_USERNAME=MONGO_USERNAME,
             MONGO_PASSWORD=MONGO_PASSWORD,
+            TOGETHER_API_KEY=TOGETHER_API_KEY,
         )
