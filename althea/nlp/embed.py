@@ -1,8 +1,12 @@
 """althea/nlp/embed.py"""
 
-from client import openai
+from langchain_experimental.text_splitter import SemanticChunker
+from langchain_openai.embeddings import OpenAIEmbeddings
 
-from .models import Document
+from .client import openai
+from .models import Document, DocumentMetadata
+
+text_splitter = SemanticChunker(OpenAIEmbeddings())
 
 
 async def chunk_text_into_documents(
@@ -22,9 +26,27 @@ async def chunk_text_into_documents(
 
     documents = []
 
-    # TODO: Chunk the text into documents
+    # Semantically chunk the text into documents
+    docs = text_splitter.create_documents([text])
 
-    # TODO: Embed the documents
+    # Embed the documents
+    embeddings = await openai.embeddings.create(
+        input=[doc.page_content for doc in docs], model="text-embedding-3-small"
+    )
+
+    for idx, (doc, embedding) in enumerate(zip(docs, embeddings.data)):
+        # Create a document
+        documents.append(
+            Document(
+                id=work_id,
+                values=embedding.embedding,
+                metadata=DocumentMetadata(
+                    index=idx,
+                    title=title,
+                    text=doc.page_content,
+                ),
+            )
+        )
 
     return documents
 
