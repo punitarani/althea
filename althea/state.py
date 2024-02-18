@@ -94,21 +94,18 @@ class State(rx.State):
 
     async def process_question(self, form_data: dict[str, str]):
         self.submitted = True
-        # Get the question from the form
         question = form_data["question"]
-        print (question)
-        print (self.submitted)
-
-
-        # Check if the question is empty
-        if question == "" or question == None:
+        
+        if question == "" or question is None:
             self.submitted = False
-            print (question)
             return
-        #if self.api_type == "openai":
-        #    model = self.openai_process_question
-        #else:
-        #    model = self.baidu_process_question
+        
+        self.chats[self.current_chat] = [] 
 
-        #async for value in model(question):
-        #    yield value
+        answer = "Response here Response here Response here Response here Response here Response here Response here Response here Response here Response here Response here Response here Response here"  # Simulate fetching an answer
+        
+        self.chats[self.current_chat].append(QA(question=question, answer=answer))
+
+        self.chats = dict(self.chats)
+
+        print(f"Question: {question}, Response: {answer}")

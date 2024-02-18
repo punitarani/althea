@@ -3,35 +3,23 @@ from althea import styles
 from althea.components import loading_icon
 from althea.state import QA, State
 
- 
-    
-""" 
 def message(qa: QA) -> rx.Component:
-
     return rx.chakra.box(
         rx.chakra.box(
             rx.chakra.text(
-                qa.question,
-                bg=styles.border_color,
-                shadow=styles.shadow_light,
-                **styles.message_style,
-            ),
-            text_align="right",
-            margin_top="1em",
-        ),
-        rx.chakra.box(
-            rx.chakra.text(
                 qa.answer,
-                bg=styles.accent_color,
-                shadow=styles.shadow_light,
+                bg=styles.bg_medium_color,
+                border= "1px solid",
+                border_color= "#fff3",
+                shadow= "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
                 **styles.message_style,
             ),
             text_align="left",
-            padding_top="1em",
+            padding_top="8em",
         ),
         width="100%",
-    )
 
+    )
 
 def chat() -> rx.Component:
     return rx.chakra.vstack(
@@ -42,10 +30,10 @@ def chat() -> rx.Component:
         max_w="3xl",
         padding_x="4",
         align_self="center",
-        overflow="hidden",
+        overflow="auto",
         padding_bottom="5em",
-    ) 
- """
+        display=rx.cond(State.submitted, "block", "none"),
+    )
  
  
 def boxes_component() -> rx.Component:
@@ -97,6 +85,7 @@ def layout() -> rx.Component:
     return rx.chakra.box(
         action_bar(),
         boxes_component(), 
+        chat(),
         min_height="100vh",  
         #position="relative",
     )
@@ -176,7 +165,5 @@ def action_bar() -> rx.Component:
         align_items="stretch",
         width="100%",
         #is_open=State.submitted,
-        
-        
     )
 

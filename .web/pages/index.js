@@ -15,51 +15,20 @@ import NextHead from "next/head"
 
 
 
-export function Modal_a5f9b941ad9deaf5670339b14b6480af () {
+export function Formcontrol_b48972261020505866a0e80269cd40ba () {
+  const ref_question = useRef(null); refs['ref_question'] = ref_question;
   const state__state = useContext(StateContexts.state__state)
 
 
   return (
-    <Modal isOpen={state__state.modal_open}>
-  <ModalOverlay>
-  <ModalContent sx={{"background": "#222", "color": "#fff"}}>
-  <ModalHeader>
-  <HStack alignItems={`center`} justifyContent={`space-between`} sx={{"alignItems": "center", "justifyContent": "space-between"}}>
-  <Text>
-  {`Create new chat`}
-</Text>
-  <Closeicon_c90c6601ae2cde3940fecab2e59b2ad0/>
+    <FormControl isDisabled={state__state.processing}>
+  <HStack sx={{"alignItems": "center", "justifyContent": "space-between"}}>
+  <Input id={`question`} placeholder={`Ask a research question`} ref={ref_question} sx={{"background": "#222", "borderColor": "#fff3", "borderWidth": "1px", "p": "4", "_placeholder": {"color": "#fffa"}, "_hover": {"borderColor": "#C70039"}}}/>
+  <Button sx={{"background": "#222", "borderColor": "#fff3", "borderWidth": "1px", "p": "4", "_hover": {"background": "#C70039"}, "shadow": "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;", "color": "#fff"}} type={`submit`}>
+  <Fragment_b63270537008a60ad7c622005e3f02ed/>
+</Button>
 </HStack>
-</ModalHeader>
-  <ModalBody>
-  <Input_ab7bcb0ccaff54eb20331ff64b12e24f/>
-</ModalBody>
-  <ModalFooter>
-  <Button_ef632d83b8d318aaed3f9d0b4d4600c6/>
-</ModalFooter>
-</ModalContent>
-</ModalOverlay>
-</Modal>
-  )
-}
-
-export function Box_8a00cdd0777258be85cfa786853448ff () {
-  const state__state = useContext(StateContexts.state__state)
-
-
-  return (
-    <Box sx={{"position": isTrue(((state__state.submitted) === (true))) ? `fixed` : `absolute`, "top": isTrue(((state__state.submitted) === (true))) ? `0%` : `50%`, "left": isTrue(((state__state.submitted) === (true))) ? `0%` : `50%`, "transform": isTrue(((state__state.submitted) === (true))) ? `` : `translate(-50%, -50%)`, "py": "4", "backdropFilter": "auto", "backdropBlur": "lg", "alignItems": "stretch", "width": "100%"}}>
-  <VStack sx={{"width": "100%", "maxW": "3xl", "mx": "auto", "alignItems": "stretch", "justifyContent": "space-between"}}>
-  <Text sx={{"fontSize": "3xl", "fontWeight": "bold", "color": "#FFFFFF", "textAlign": "center", "width": "100%", "marginBottom": "2em"}}>
-  {`Explore the scientific literature`}
-</Text>
-  <Box_bf47e37454b3e3afd0d869ea88fbfdf4/>
-  <Text sx={{"fontSize": "xs", "color": "#fff6", "textAlign": "center"}}>
-  {`Althea is a research assistant. Use with discretion.`}
-</Text>
-</VStack>
-  <Box_620608ac2582bc6eee69f07b8ff2f4a9/>
-</Box>
+</FormControl>
   )
 }
 
@@ -81,82 +50,6 @@ export function Fragment_b63270537008a60ad7c622005e3f02ed () {
 </Fragment>
 )}
 </Fragment>
-  )
-}
-
-export function Drawer_d343839d3b333d95f66eafb1513d941d () {
-  const state__state = useContext(StateContexts.state__state)
-
-
-  return (
-    <Drawer isOpen={state__state.drawer_open} placement={`left`}>
-  <DrawerOverlay>
-  <DrawerContent sx={{"background": "#111", "color": "#fff", "opacity": "0.9"}}>
-  <DrawerHeader>
-  <HStack sx={{"alignItems": "center", "justifyContent": "space-between"}}>
-  <Text>
-  {`Research history`}
-</Text>
-  <Closeicon_11ed883525187cdaad471aef955f22dd/>
-</HStack>
-</DrawerHeader>
-  <DrawerBody>
-  <Vstack_4ad21abbfcbeefcf9794712abcb1be9e/>
-</DrawerBody>
-</DrawerContent>
-</DrawerOverlay>
-</Drawer>
-  )
-}
-
-export function Closeicon_11ed883525187cdaad471aef955f22dd () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
-
-  const on_click_2905983f8758758258aab6a80fcc9a4c = useCallback((_e) => addEvents([Event("state.state.toggle_drawer", {})], (_e), {}), [addEvents, Event])
-
-  return (
-    <CloseIcon onClick={on_click_2905983f8758758258aab6a80fcc9a4c} sx={{"fontSize": "md", "color": "#fff8", "_hover": {"color": "#fff"}, "cursor": "pointer", "w": "8"}}/>
-  )
-}
-
-export function Hamburgericon_c98271a08d187d17b68bd3253ad088ed () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
-
-  const on_click_2905983f8758758258aab6a80fcc9a4c = useCallback((_e) => addEvents([Event("state.state.toggle_drawer", {})], (_e), {}), [addEvents, Event])
-
-  return (
-    <HamburgerIcon onClick={on_click_2905983f8758758258aab6a80fcc9a4c} sx={{"mr": 4, "cursor": "pointer"}}/>
-  )
-}
-
-export function Closeicon_c90c6601ae2cde3940fecab2e59b2ad0 () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
-
-  const on_click_e9416bfe015c0fd3bcfc5ccef2e35037 = useCallback((_e) => addEvents([Event("state.state.toggle_modal", {})], (_e), {}), [addEvents, Event])
-
-  return (
-    <CloseIcon onClick={on_click_e9416bfe015c0fd3bcfc5ccef2e35037} sx={{"fontSize": "sm", "color": "#fff8", "_hover": {"color": "#fff"}, "cursor": "pointer"}}/>
-  )
-}
-
-export function Vstack_4ad21abbfcbeefcf9794712abcb1be9e () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
-  const state__state = useContext(StateContexts.state__state)
-
-
-  return (
-    <VStack alignItems={`stretch`} sx={{"alignItems": "stretch", "justifyContent": "space-between"}}>
-  {state__state.chat_titles.map((chat, index_9a1d5ef446d60768d2d31d08f0a1a150) => (
-  <HStack key={index_9a1d5ef446d60768d2d31d08f0a1a150} sx={{"color": "#fff", "cursor": "pointer"}}>
-  <Box onClick={(_e) => addEvents([Event("state.state.set_chat", {chat_name:chat})], (_e), {})} sx={{"border": "double 1px transparent;", "borderRadius": "10px;", "backgroundImage": "linear-gradient(#111, #111), radial-gradient(circle at top left, #C70039,#4c2db3);", "backgroundOrigin": "border-box;", "backgroundClip": "padding-box, border-box;", "p": "2", "_hover": {"backgroundImage": "linear-gradient(#111, #111), radial-gradient(circle at top left, #C70039,#6649D8);"}, "color": "#fff8", "flex": "1"}}>
-  {chat}
-</Box>
-  <Box sx={{"border": "double 1px transparent;", "borderRadius": "10px;", "backgroundImage": "linear-gradient(#111, #111), radial-gradient(circle at top left, #C70039,#4c2db3);", "backgroundOrigin": "border-box;", "backgroundClip": "padding-box, border-box;", "p": "2", "_hover": {"backgroundImage": "linear-gradient(#111, #111), radial-gradient(circle at top left, #C70039,#6649D8);"}}}>
-  <DeleteIcon onClick={(_e) => addEvents([Event("state.state.delete_chat", {})], (_e), {})} sx={{"fontSize": "md", "color": "#fff8", "_hover": {"color": "#fff"}, "cursor": "pointer", "w": "8"}}/>
-</Box>
-</HStack>
-))}
-</VStack>
   )
 }
 
@@ -194,21 +87,112 @@ export function Box_620608ac2582bc6eee69f07b8ff2f4a9 () {
   )
 }
 
-export function Button_cab989f12f0ad9235e6312d2dfd88c7b () {
+export function Box_b5a616e1df18563174dcfebad284a968 () {
+  const state__state = useContext(StateContexts.state__state)
+
+
+  return (
+    <Box sx={{"position": isTrue(((state__state.submitted) === (true))) ? `fixed` : `absolute`, "top": isTrue(((state__state.submitted) === (true))) ? `0%` : `50%`, "left": isTrue(((state__state.submitted) === (true))) ? `0%` : `50%`, "transform": isTrue(((state__state.submitted) === (true))) ? `` : `translate(-50%, -50%)`, "py": "4", "backdropFilter": "auto", "backdropBlur": "lg", "alignItems": "stretch", "width": "100%"}}>
+  <VStack sx={{"width": "100%", "maxW": "3xl", "mx": "auto", "alignItems": "stretch", "justifyContent": "space-between"}}>
+  <Text sx={{"fontSize": "3xl", "fontWeight": "bold", "color": "#FFFFFF", "textAlign": "center", "width": "100%", "marginBottom": "2em"}}>
+  {`Explore the scientific literature`}
+</Text>
+  <Box_655ded7a9bbbced6e5f2094a8469f36a/>
+  <Text sx={{"fontSize": "xs", "color": "#fff6", "textAlign": "center"}}>
+  {`Althea is a research assistant. Use with discretion.`}
+</Text>
+</VStack>
+  <Box_620608ac2582bc6eee69f07b8ff2f4a9/>
+</Box>
+  )
+}
+
+export function Hamburgericon_c98271a08d187d17b68bd3253ad088ed () {
+  const [addEvents, connectError] = useContext(EventLoopContext);
+
+  const on_click_2905983f8758758258aab6a80fcc9a4c = useCallback((_e) => addEvents([Event("state.state.toggle_drawer", {})], (_e), {}), [addEvents, Event])
+
+  return (
+    <HamburgerIcon onClick={on_click_2905983f8758758258aab6a80fcc9a4c} sx={{"mr": 4, "cursor": "pointer"}}/>
+  )
+}
+
+export function Closeicon_c90c6601ae2cde3940fecab2e59b2ad0 () {
   const [addEvents, connectError] = useContext(EventLoopContext);
 
   const on_click_e9416bfe015c0fd3bcfc5ccef2e35037 = useCallback((_e) => addEvents([Event("state.state.toggle_modal", {})], (_e), {}), [addEvents, Event])
 
   return (
-    <Button onClick={on_click_e9416bfe015c0fd3bcfc5ccef2e35037} sx={{"background": "#C70039", "px": "4", "py": "2", "h": "auto", "shadow": "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;", "color": "#fff", "_hover": {"background": "#4c2db3"}}}>
-  {`+ New chat`}
-</Button>
+    <CloseIcon onClick={on_click_e9416bfe015c0fd3bcfc5ccef2e35037} sx={{"fontSize": "sm", "color": "#fff8", "_hover": {"color": "#fff"}, "cursor": "pointer"}}/>
   )
 }
 
-export function Box_bf47e37454b3e3afd0d869ea88fbfdf4 () {
+export function Input_ab7bcb0ccaff54eb20331ff64b12e24f () {
+  const [addEvents, connectError] = useContext(EventLoopContext);
+
+  const on_blur_655009403944aacdde6d38e4aa5f79da = useCallback((_e0) => addEvents([Event("state.state.set_new_chat_name", {value:_e0.target.value})], (_e0), {}), [addEvents, Event])
+
+  return (
+    <Input onBlur={on_blur_655009403944aacdde6d38e4aa5f79da} placeholder={`Type something...`} sx={{"background": "#222", "borderColor": "#fff3", "_placeholder": {"color": "#fffa"}}}/>
+  )
+}
+
+export function Modal_a5f9b941ad9deaf5670339b14b6480af () {
+  const state__state = useContext(StateContexts.state__state)
+
+
+  return (
+    <Modal isOpen={state__state.modal_open}>
+  <ModalOverlay>
+  <ModalContent sx={{"background": "#222", "color": "#fff"}}>
+  <ModalHeader>
+  <HStack alignItems={`center`} justifyContent={`space-between`} sx={{"alignItems": "center", "justifyContent": "space-between"}}>
+  <Text>
+  {`Create new chat`}
+</Text>
+  <Closeicon_c90c6601ae2cde3940fecab2e59b2ad0/>
+</HStack>
+</ModalHeader>
+  <ModalBody>
+  <Input_ab7bcb0ccaff54eb20331ff64b12e24f/>
+</ModalBody>
+  <ModalFooter>
+  <Button_ef632d83b8d318aaed3f9d0b4d4600c6/>
+</ModalFooter>
+</ModalContent>
+</ModalOverlay>
+</Modal>
+  )
+}
+
+export function Drawer_a828913cf922f5205819f5123c203e87 () {
+  const state__state = useContext(StateContexts.state__state)
+
+
+  return (
+    <Drawer isOpen={state__state.drawer_open} placement={`left`}>
+  <DrawerOverlay>
+  <DrawerContent sx={{"background": "#111", "color": "#fff", "opacity": "0.9"}}>
+  <DrawerHeader>
+  <HStack sx={{"alignItems": "center", "justifyContent": "space-between"}}>
+  <Text>
+  {`Research history`}
+</Text>
+  <Closeicon_11ed883525187cdaad471aef955f22dd/>
+</HStack>
+</DrawerHeader>
+  <DrawerBody>
+  <Vstack_d76ede8b754fe095fdc98671f751f775/>
+</DrawerBody>
+</DrawerContent>
+</DrawerOverlay>
+</Drawer>
+  )
+}
+
+export function Box_655ded7a9bbbced6e5f2094a8469f36a () {
   
-    const handleSubmit_45e46d72bc69c6baba3291e7ddfe71ca = useCallback((ev) => {
+    const handleSubmit_639b781293c1366c2a6fb1d9aeaf5bfb = useCallback((ev) => {
         const $form = ev.target
         ev.preventDefault()
         const form_data = {...Object.fromEntries(new FormData($form).entries()), ...{"question": getRefValue(refs['ref_question'])}}
@@ -224,19 +208,61 @@ export function Box_bf47e37454b3e3afd0d869ea88fbfdf4 () {
 
 
   return (
-    <Box as={`form`} onSubmit={handleSubmit_45e46d72bc69c6baba3291e7ddfe71ca} sx={{"width": "100%"}}>
+    <Box as={`form`} onSubmit={handleSubmit_639b781293c1366c2a6fb1d9aeaf5bfb} sx={{"width": "100%"}}>
   <Formcontrol_b48972261020505866a0e80269cd40ba/>
 </Box>
   )
 }
 
-export function Input_ab7bcb0ccaff54eb20331ff64b12e24f () {
+export function Button_cab989f12f0ad9235e6312d2dfd88c7b () {
   const [addEvents, connectError] = useContext(EventLoopContext);
 
-  const on_blur_655009403944aacdde6d38e4aa5f79da = useCallback((_e0) => addEvents([Event("state.state.set_new_chat_name", {value:_e0.target.value})], (_e0), {}), [addEvents, Event])
+  const on_click_e9416bfe015c0fd3bcfc5ccef2e35037 = useCallback((_e) => addEvents([Event("state.state.toggle_modal", {})], (_e), {}), [addEvents, Event])
 
   return (
-    <Input onBlur={on_blur_655009403944aacdde6d38e4aa5f79da} placeholder={`Type something...`} sx={{"background": "#222", "borderColor": "#fff3", "_placeholder": {"color": "#fffa"}}}/>
+    <Button onClick={on_click_e9416bfe015c0fd3bcfc5ccef2e35037} sx={{"background": "#C70039", "px": "4", "py": "2", "h": "auto", "shadow": "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;", "color": "#fff", "_hover": {"background": "#4c2db3"}}}>
+  {`+ New chat`}
+</Button>
+  )
+}
+
+export function Box_fb13cfbf6a763d5fa29dee8d6c309709 () {
+  const state__state = useContext(StateContexts.state__state)
+
+
+  return (
+    <Box>
+  {state__state.chats[state__state.current_chat].map((qa, index_fa0fbc165e91d901610c767de9f3f9c5) => (
+  <Box key={index_fa0fbc165e91d901610c767de9f3f9c5} sx={{"width": "100%"}}>
+  <Box sx={{"textAlign": "left", "paddingTop": "8em"}}>
+  <Text sx={{"background": "#222", "border": "1px solid", "borderColor": "#fff3", "shadow": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)", "display": "inline-block", "p": "4", "borderRadius": "xl", "maxW": "30em"}}>
+  {qa.answer}
+</Text>
+</Box>
+</Box>
+))}
+</Box>
+  )
+}
+
+export function Closeicon_11ed883525187cdaad471aef955f22dd () {
+  const [addEvents, connectError] = useContext(EventLoopContext);
+
+  const on_click_2905983f8758758258aab6a80fcc9a4c = useCallback((_e) => addEvents([Event("state.state.toggle_drawer", {})], (_e), {}), [addEvents, Event])
+
+  return (
+    <CloseIcon onClick={on_click_2905983f8758758258aab6a80fcc9a4c} sx={{"fontSize": "md", "color": "#fff8", "_hover": {"color": "#fff"}, "cursor": "pointer", "w": "8"}}/>
+  )
+}
+
+export function Vstack_0276a0179aa8f2840511a814363ee8d0 () {
+  const state__state = useContext(StateContexts.state__state)
+
+
+  return (
+    <VStack sx={{"py": "8", "flex": "1", "width": "100%", "maxW": "3xl", "paddingInlineStart": "4", "paddingInlineEnd": "4", "alignSelf": "center", "overflow": "auto", "paddingBottom": "5em", "display": isTrue(state__state.submitted) ? `block` : `none`, "alignItems": "stretch", "justifyContent": "space-between"}}>
+  <Box_fb13cfbf6a763d5fa29dee8d6c309709/>
+</VStack>
   )
 }
 
@@ -269,20 +295,24 @@ export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
   )
 }
 
-export function Formcontrol_b48972261020505866a0e80269cd40ba () {
-  const ref_question = useRef(null); refs['ref_question'] = ref_question;
+export function Vstack_d76ede8b754fe095fdc98671f751f775 () {
   const state__state = useContext(StateContexts.state__state)
+  const [addEvents, connectError] = useContext(EventLoopContext);
 
 
   return (
-    <FormControl isDisabled={state__state.processing}>
-  <HStack sx={{"alignItems": "center", "justifyContent": "space-between"}}>
-  <Input id={`question`} placeholder={`Ask a research question`} ref={ref_question} sx={{"background": "#222", "borderColor": "#fff3", "borderWidth": "1px", "p": "4", "_placeholder": {"color": "#fffa"}, "_hover": {"borderColor": "#C70039"}}}/>
-  <Button sx={{"background": "#222", "borderColor": "#fff3", "borderWidth": "1px", "p": "4", "_hover": {"background": "#C70039"}, "shadow": "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;", "color": "#fff"}} type={`submit`}>
-  <Fragment_b63270537008a60ad7c622005e3f02ed/>
-</Button>
+    <VStack alignItems={`stretch`} sx={{"alignItems": "stretch", "justifyContent": "space-between"}}>
+  {state__state.chat_titles.map((chat, index_9a1d5ef446d60768d2d31d08f0a1a150) => (
+  <HStack key={index_9a1d5ef446d60768d2d31d08f0a1a150} sx={{"color": "#fff", "cursor": "pointer"}}>
+  <Box onClick={(_e) => addEvents([Event("state.state.set_chat", {chat_name:chat})], (_e), {})} sx={{"border": "double 1px transparent;", "borderRadius": "10px;", "backgroundImage": "linear-gradient(#111, #111), radial-gradient(circle at top left, #C70039,#4c2db3);", "backgroundOrigin": "border-box;", "backgroundClip": "padding-box, border-box;", "p": "2", "_hover": {"backgroundImage": "linear-gradient(#111, #111), radial-gradient(circle at top left, #C70039,#6649D8);"}, "color": "#fff8", "flex": "1"}}>
+  {chat}
+</Box>
+  <Box sx={{"border": "double 1px transparent;", "borderRadius": "10px;", "backgroundImage": "linear-gradient(#111, #111), radial-gradient(circle at top left, #C70039,#4c2db3);", "backgroundOrigin": "border-box;", "backgroundClip": "padding-box, border-box;", "p": "2", "_hover": {"backgroundImage": "linear-gradient(#111, #111), radial-gradient(circle at top left, #C70039,#6649D8);"}}}>
+  <DeleteIcon onClick={(_e) => addEvents([Event("state.state.delete_chat", {})], (_e), {})} sx={{"fontSize": "md", "color": "#fff8", "_hover": {"color": "#fff"}, "cursor": "pointer", "w": "8"}}/>
+</Box>
 </HStack>
-</FormControl>
+))}
+</VStack>
   )
 }
 
@@ -325,10 +355,11 @@ export default function Component() {
 </HStack>
 </Box>
   <Box sx={{"minHeight": "100vh"}}>
-  <Box_8a00cdd0777258be85cfa786853448ff/>
+  <Box_b5a616e1df18563174dcfebad284a968/>
   <Box_620608ac2582bc6eee69f07b8ff2f4a9/>
+  <Vstack_0276a0179aa8f2840511a814363ee8d0/>
 </Box>
-  <Drawer_d343839d3b333d95f66eafb1513d941d/>
+  <Drawer_a828913cf922f5205819f5123c203e87/>
   <Modal_a5f9b941ad9deaf5670339b14b6480af/>
 </VStack>
   <NextHead>
