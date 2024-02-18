@@ -58,7 +58,6 @@ for tag in ['chemistry', 'biology', 'law']:
     folder_path = f'/Users/luweitao/Documents/Projects/althea/althea/dataset/{tag}' #This is where data is.
     search_pattern = os.path.join(folder_path, '*.pdf')
     pdf_files = glob.glob(search_pattern)
-    
     for pdf_file in pdf_files:
         pdf_name = f"{os.path.basename(pdf_file)}"
         tag_list[pdf_name]=tag if pdf_file not in tag_list else tag
