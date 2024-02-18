@@ -102,7 +102,7 @@ class State(rx.State):
         
         self.chats[self.current_chat] = [] 
 
-        answer = "Response here Response here Response here Response here Response here Response here Response here Response here Response here Response here Response here Response here Response here"  # Simulate fetching an answer
+        answer = query(question)
         
         self.chats[self.current_chat].append(QA(question=question, answer=answer))
 

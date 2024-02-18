@@ -1,6 +1,6 @@
 import reflex as rx
 from althea import styles
-from althea.components import loading_icon
+from althea.components import loading_icon, graph_visual
 from althea.state import QA, State
 
 def message(qa: QA) -> rx.Component:
@@ -65,6 +65,7 @@ def boxes_component() -> rx.Component:
         rx.chakra.box(
             rx.chakra.text("Chart", font_weight="bold"),
             "Content of the first box",
+            graph_visual.graph_example(),
             **box_style,
             #top="100%",
         ),
