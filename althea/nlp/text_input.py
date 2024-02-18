@@ -1,4 +1,5 @@
 import os
+import json
 from langchain import OpenAI
 
 # The vectorstore we'll be using
@@ -39,3 +40,17 @@ def QA(embedded_txt,question,qabot):
 )
     return qabot.invoke(dict(query=question))["result"]#return 0 if not related
 
+async def get_keyworkds(text: str) -> list[str]:
+    """Get the keywords from the scientific literature."""
+
+    response = await openai.chat.completions.create(
+        model="gpt-3.5-turbo-0125",
+        messages=[
+            {"role": "system",
+             "content": "Extract the top 10 keywords and concepts from the scientific literature. They need to be relavant to the overall semantic meaning of the text. Return the keywords in JSON format with a single root node `keywords`"},
+            {"role": "user", "content": text},
+        ],
+        response_format={"type": "json_object"},
+        temperature=0.5,
+    )
+    return json.loads(response.choices[0].message.content).get("keywords", [])
