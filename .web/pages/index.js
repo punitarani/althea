@@ -268,21 +268,47 @@ export default function Component() {
   return (
     <Fragment>
   <Fragment_1762bb90abdb81b879b2a22edbbe01a1/>
-  <RadixThemesFlex css={{"height": "100vh", "display": "flex", "alignItems": "center", "justifyContent": "center"}}>
-  <RadixThemesThemePanel/>
-  <RadixThemesFlex align={`center`} css={{"fontSize": "2em", "flexDirection": "column"}} gap={`7`}>
-  <RadixThemesHeading size={`9`}>
-  {`Welcome to Reflex!`}
-</RadixThemesHeading>
-  <RadixThemesText as={`p`}>
-  {`Get started by editing `}
-  <RadixThemesCode>
-  {`althea/althea.py`}
-</RadixThemesCode>
-</RadixThemesText>
-  <Button_d474754a9d7f8322123330cf11ed7fd1/>
-</RadixThemesFlex>
-</RadixThemesFlex>
+  <VStack alignItems={`stretch`} spacing={`0`} sx={{"background": "#111", "color": "#fff", "minH": "100vh", "alignItems": "stretch", "justifyContent": "space-between"}}>
+  <Box sx={{"background": "#111", "backdropFilter": "auto", "backdropBlur": "lg", "p": "4", "borderBottom": "1px solid #fff3", "position": "sticky", "top": "0", "zIndex": "100"}}>
+  <HStack justify={`space-between`} sx={{"alignItems": "center", "justifyContent": "space-between"}}>
+  <HStack sx={{"alignItems": "center", "justifyContent": "space-between"}}>
+  <Hamburgericon_c98271a08d187d17b68bd3253ad088ed/>
+  <Breadcrumb>
+  <BreadcrumbItem>
+  <Heading size={`md`} sx={{"fontWeight": "bold"}}>
+  {`Althea`}
+</Heading>
+</BreadcrumbItem>
+</Breadcrumb>
+</HStack>
+  <HStack spacing={`4`} sx={{"alignItems": "center", "justifyContent": "space-between"}}>
+  <Button_cab989f12f0ad9235e6312d2dfd88c7b/>
+  <Menu sx={{"background": "#111", "border": "red"}}>
+  <MenuButton>
+  <Avatar name={`NB`} size={`md`} sx={{"shadow": "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;", "color": "#fff", "background": "#fff3"}}/>
+  <Box/>
+</MenuButton>
+  <MenuList sx={{"background": "#111", "border": "1.5px solid #222"}}>
+  <MenuItem sx={{"background": "#111", "color": "#fff"}}>
+  {`Help`}
+</MenuItem>
+  <MenuDivider sx={{"border": "1px solid #222"}}/>
+  <MenuItem sx={{"background": "#111", "color": "#fff"}}>
+  {`Settings`}
+</MenuItem>
+</MenuList>
+</Menu>
+</HStack>
+</HStack>
+</Box>
+  <Box sx={{"minHeight": "100vh"}}>
+  <Box_6ad5ee50aea838e2e82dd27c5f1a78b2/>
+  <Box_620608ac2582bc6eee69f07b8ff2f4a9/>
+  <Vstack_48cf8d79b2b602d694a649406e7a3f5a/>
+</Box>
+  <Drawer_97f35b88b43e4dff28cc84b566060908/>
+  <Modal_a5f9b941ad9deaf5670339b14b6480af/>
+</VStack>
   <NextHead>
   <title>
   {`Reflex App`}
