@@ -9,8 +9,9 @@ def index() -> rx.Component:
     """The main app."""
     return rx.chakra.vstack(
         navbar(),
-        chat.chat(),
         chat.action_bar(),
+        #chat.cards(),
+        #chat.chat(),
         sidebar(),
         modal(),
         bg=styles.bg_dark_color,

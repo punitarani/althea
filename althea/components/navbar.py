@@ -16,13 +16,13 @@ def navbar():
                 ),
                 rx.chakra.breadcrumb(
                     rx.chakra.breadcrumb_item(
-                        rx.chakra.heading("Althea", size="sm"),
+                        rx.chakra.heading("Althea", size="md", font_weight="bold"),
                     ),
-                    rx.chakra.breadcrumb_item(
-                        rx.chakra.text(
-                            State.current_chat, size="sm", font_weight="normal"
-                        ),
-                    ),
+                    #rx.chakra.breadcrumb_item(
+                        #rx.chakra.text(
+                            #State.current_chat, size="sm", font_weight="normal"
+                        #),
+                    #),
                 ),
             ),
             rx.chakra.hstack(

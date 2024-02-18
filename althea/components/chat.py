@@ -1,19 +1,13 @@
 import reflex as rx
-
 from althea import styles
 from althea.components import loading_icon
 from althea.state import QA, State
 
-
+ 
+    
+""" 
 def message(qa: QA) -> rx.Component:
-    """A single question/answer message.
 
-    Args:
-        qa: The question/answer pair.
-
-    Returns:
-        A component displaying the question/answer pair.
-    """
     return rx.chakra.box(
         rx.chakra.box(
             rx.chakra.text(
@@ -40,7 +34,6 @@ def message(qa: QA) -> rx.Component:
 
 
 def chat() -> rx.Component:
-    """List all the messages in a single conversation."""
     return rx.chakra.vstack(
         rx.chakra.box(rx.foreach(State.chats[State.current_chat], message)),
         py="8",
@@ -51,13 +44,40 @@ def chat() -> rx.Component:
         align_self="center",
         overflow="hidden",
         padding_bottom="5em",
+    ) 
+ """
+        
+def cards() -> rx.Component:
+    return rx.card(
+    rx.link(
+        rx.flex(
+            rx.card("Card 1", size="1"),
+            rx.card("Card 2", size="2"),
+            rx.card("Card 3", size="3"),
+            rx.card("Card 4", size="4"),
+            rx.card("Card 5", size="5"),
+            spacing="2",
+            align_items="flex-start",
+            flex_wrap="wrap",
     )
-
+    ),
+    as_child=True,
+)
+        
 
 def action_bar() -> rx.Component:
     """The action bar to send a new message."""
     return rx.chakra.box(
         rx.chakra.vstack(
+            rx.chakra.text(
+                "Explore the scientific literature",
+                font_size="3xl",
+                font_weight="bold",
+                color="#FFFFFF",
+                text_align="center",
+                width="100%",
+                margin_bottom="2em",
+            ),
             rx.chakra.form(
                 rx.chakra.form_control(
                     rx.chakra.hstack(
@@ -67,6 +87,7 @@ def action_bar() -> rx.Component:
                             _placeholder={"color": "#fffa"},
                             _hover={"border_color": styles.accent_color},
                             style=styles.input_style,
+                            
                         ),
                         rx.chakra.button(
                             rx.cond(
@@ -79,10 +100,11 @@ def action_bar() -> rx.Component:
                             style=styles.input_style,
                         ),
                     ),
+                    
                     is_disabled=State.processing,
                 ),
                 on_submit=State.process_question,
-                reset_on_submit=True,
+                reset_on_submit=False,
                 width="100%",
             ),
             rx.chakra.text(
@@ -95,13 +117,31 @@ def action_bar() -> rx.Component:
             max_w="3xl",
             mx="auto",
         ),
-        position="sticky",
-        bottom="0",
-        left="0",
+        
+        #how to access the value of `action_bar_at_top` 
+        #position="absolute",
+        position=rx.cond(
+            State.submitted == True, "fixed", "absolute"
+        ),
+        top=rx.cond(
+            State.submitted == True, "0%", "50%"
+        ),
+        left=rx.cond(
+            State.submitted == True, "0%", "50%"
+        ),
+        
+        transform=rx.cond(
+            State.submitted == True, "", "translate(-50%, -50%)"
+        ),
+    
         py="4",
         backdrop_filter="auto",
         backdrop_blur="lg",
-        border_top=f"1px solid {styles.border_color}",
+        # border_top=f"1px solid {styles.border_color}",
         align_items="stretch",
         width="100%",
+        #is_open=State.submitted,
+        
+        
     )
+

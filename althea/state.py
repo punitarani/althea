@@ -1,32 +1,9 @@
 import json
 import os
 
-import openai
 import reflex as rx
 import requests
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
-openai.api_base = os.getenv("OPENAI_API_BASE", "https://api.openai.com/v1")
-
-BAIDU_API_KEY = os.getenv("BAIDU_API_KEY")
-BAIDU_SECRET_KEY = os.getenv("BAIDU_SECRET_KEY")
-
-
-if not openai.api_key and not BAIDU_API_KEY:
-    raise Exception("Please set OPENAI_API_KEY or BAIDU_API_KEY")
-
-
-def get_access_token():
-    """
-    :return: access_token
-    """
-    url = "https://aip.baidubce.com/oauth/2.0/token"
-    params = {
-        "grant_type": "client_credentials",
-        "client_id": BAIDU_API_KEY,
-        "client_secret": BAIDU_SECRET_KEY,
-    }
-    return str(requests.post(url, params=params).json().get("access_token"))
 
 
 class QA(rx.Base):
@@ -37,7 +14,7 @@ class QA(rx.Base):
 
 
 DEFAULT_CHATS = {
-    "Intros": [],
+    "Althea does research": [],
 }
 
 
@@ -48,10 +25,13 @@ class State(rx.State):
     chats: dict[str, list[QA]] = DEFAULT_CHATS
 
     # The current chat name.
-    current_chat = "Intros"
+    current_chat = "Althea does research"
 
     # The current question.
     question: str
+    
+    # Is the question submitted
+    submitted: bool = False
 
     # Whether we are processing the question.
     processing: bool = False
@@ -65,7 +45,6 @@ class State(rx.State):
     # Whether the modal is open.
     modal_open: bool = False
 
-    api_type: str = "baidu" if BAIDU_API_KEY else "openai"
 
     def create_chat(self):
         """Create a new chat."""
@@ -83,6 +62,9 @@ class State(rx.State):
     def toggle_drawer(self):
         """Toggle the drawer."""
         self.drawer_open = not self.drawer_open
+        
+    def bar_top(self):
+        self.submitted = not self.submitted
 
     def delete_chat(self):
         """Delete the current chat."""
@@ -111,101 +93,22 @@ class State(rx.State):
         return list(self.chats.keys())
 
     async def process_question(self, form_data: dict[str, str]):
+        self.submitted = True
         # Get the question from the form
         question = form_data["question"]
+        print (question)
+        print (self.submitted)
+
 
         # Check if the question is empty
-        if question == "":
+        if question == "" or question == None:
+            self.submitted = False
+            print (question)
             return
+        #if self.api_type == "openai":
+        #    model = self.openai_process_question
+        #else:
+        #    model = self.baidu_process_question
 
-        if self.api_type == "openai":
-            model = self.openai_process_question
-        else:
-            model = self.baidu_process_question
-
-        async for value in model(question):
-            yield value
-
-    async def openai_process_question(self, question: str):
-        """Get the response from the API.
-
-        Args:
-            form_data: A dict with the current question.
-        """
-
-        # Add the question to the list of questions.
-        qa = QA(question=question, answer="")
-        self.chats[self.current_chat].append(qa)
-
-        # Clear the input and start the processing.
-        self.processing = True
-        yield
-
-        # Build the messages.
-        messages = [
-            {"role": "system", "content": "You are a friendly chatbot named Reflex."}
-        ]
-        for qa in self.chats[self.current_chat]:
-            messages.append({"role": "user", "content": qa.question})
-            messages.append({"role": "assistant", "content": qa.answer})
-
-        # Remove the last mock answer.
-        messages = messages[:-1]
-
-        # Start a new session to answer the question.
-        session = openai.ChatCompletion.create(
-            model=os.getenv("OPENAI_MODEL", "gpt-3.5-turbo"),
-            messages=messages,
-            stream=True,
-        )
-
-        # Stream the results, yielding after every word.
-        for item in session:
-            if hasattr(item.choices[0].delta, "content"):
-                answer_text = item.choices[0].delta.content
-                self.chats[self.current_chat][-1].answer += answer_text
-                self.chats = self.chats
-                yield
-
-        # Toggle the processing flag.
-        self.processing = False
-
-    async def baidu_process_question(self, question: str):
-        """Get the response from the API.
-
-        Args:
-            form_data: A dict with the current question.
-        """
-        # Add the question to the list of questions.
-        qa = QA(question=question, answer="")
-        self.chats[self.current_chat].append(qa)
-
-        # Clear the input and start the processing.
-        self.processing = True
-        yield
-
-        # Build the messages.
-        messages = []
-        for qa in self.chats[self.current_chat]:
-            messages.append({"role": "user", "content": qa.question})
-            messages.append({"role": "assistant", "content": qa.answer})
-
-        # Remove the last mock answer.
-        messages = json.dumps({"messages": messages[:-1]})
-        # Start a new session to answer the question.
-        session = requests.request(
-            "POST",
-            "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/completions_pro?access_token="
-            + get_access_token(),
-            headers={"Content-Type": "application/json"},
-            data=messages,
-        )
-
-        json_data = json.loads(session.text)
-        if "result" in json_data.keys():
-            answer_text = json_data["result"]
-            self.chats[self.current_chat][-1].answer += answer_text
-            self.chats = self.chats
-            yield
-        # Toggle the processing flag.
-        self.processing = False
+        #async for value in model(question):
+        #    yield value
