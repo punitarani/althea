@@ -30,9 +30,9 @@ qabot = RetrievalQA.from_chain_type(
 )
 def query(Input_Q):
     #check if the question is related(filter)
-    Q = f"Is {Input_Q} relevant to any of the documents in your database?response 1 if yes else 0."
+    Q = f"Is {Input_Q} relevant to any of the documents or related to asking the database information in your database?response 1 if yes else 0."
     
-    if(qabot.invoke(dict(query=Q))["result"]=='0'):
+    if(qabot.invoke(dict(query=Q))["result"]=='#'):
         
         return "This question is not related to any domain in our paper database." 
     else:
@@ -40,3 +40,11 @@ def query(Input_Q):
         
 
     #if not, return 0
+
+while True:
+    print("Please input your question:")
+    question = input()
+    print(query(question))
+    print("Do you have another question? (yes or no)")
+    if input().lower() != 'yes':
+        break
