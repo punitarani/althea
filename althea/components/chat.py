@@ -53,7 +53,9 @@ def boxes_component() -> rx.Component:
     box_style = {
         "background_color": styles.bg_medium_color, 
         "color": styles.text_light_color,
-        "border_radius": "6px",
+        "border": "1px solid",
+        "border_color": "#fff3",
+        "border_radius": "var(--chakra-radii-md)",
         "shadow": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
         "padding": "16px",
         "width": "70%",
