@@ -41,10 +41,10 @@ def query(Input_Q):
 
     #if not, return 0
 
-while True:
-    print("Please input your question:")
-    question = input()
-    print(query(question))
-    print("Do you have another question? (yes or no)")
-    if input().lower() != 'yes':
-        break
+# while True:
+#     print("Please input your question:")
+#     question = input()
+#     print(query(question))
+#     print("Do you have another question? (yes or no)")
+#     if input().lower() != 'yes':
+#         break
