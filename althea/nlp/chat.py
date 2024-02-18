@@ -1,15 +1,7 @@
 """althea/nlp/chat.py"""
 
-from langchain_community.vectorstores import Pinecone
-from langchain_openai import OpenAIEmbeddings
+from .base import vectorstore
 
-from althea import SECRETS
-from althea.store.vector import pc
-
-embedding = OpenAIEmbeddings(
-    api_key=SECRETS.OPENAI_API_KEY, model="text-embedding-3-small"
-)
-vectorstore = Pinecone(index=pc.Index("papers"), text_key="text", embedding=embedding)
 retriever = vectorstore.as_retriever(k=5)
 
 # TODO: build a chatbot
