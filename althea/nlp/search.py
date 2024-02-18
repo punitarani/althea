@@ -25,7 +25,7 @@ async def search_wiki(question: str) -> str:
     prediction = await cohere.chat(
         message=question,
         preamble_override="You are a scientific research assistant. You answer questions concisely and accurately.",
-        model="command-light",
+        model="command",
         temperature=0.25,
         stream=False,
         citation_quality="accurate",
