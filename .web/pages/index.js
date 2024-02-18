@@ -15,53 +15,19 @@ import NextHead from "next/head"
 
 
 
-export function Drawer_0d0591ac83d9b69304a88ff0099e4e7d () {
-  const state__state = useContext(StateContexts.state__state)
+export function Hamburgericon_c98271a08d187d17b68bd3253ad088ed () {
+  const [addEvents, connectError] = useContext(EventLoopContext);
 
+  const on_click_2905983f8758758258aab6a80fcc9a4c = useCallback((_e) => addEvents([Event("state.state.toggle_drawer", {})], (_e), {}), [addEvents, Event])
 
   return (
-    <Drawer isOpen={state__state.drawer_open} placement={`left`}>
-  <DrawerOverlay>
-  <DrawerContent sx={{"background": "#111", "color": "#fff", "opacity": "0.9"}}>
-  <DrawerHeader>
-  <HStack sx={{"alignItems": "center", "justifyContent": "space-between"}}>
-  <Text>
-  {`Research history`}
-</Text>
-  <Closeicon_11ed883525187cdaad471aef955f22dd/>
-</HStack>
-</DrawerHeader>
-  <DrawerBody>
-  <Vstack_54e6360bd542bf11f98509fa51406717/>
-</DrawerBody>
-</DrawerContent>
-</DrawerOverlay>
-</Drawer>
+    <Button onClick={on_click_e9416bfe015c0fd3bcfc5ccef2e35037} sx={{"background": "#C70039", "px": "4", "py": "2", "h": "auto", "shadow": "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;", "color": "#fff", "_hover": {"background": "#4c2db3"}}}>
+  {`+ New chat`}
+</Button>
   )
 }
 
-export function Fragment_b63270537008a60ad7c622005e3f02ed () {
-  const state__state = useContext(StateContexts.state__state)
-
-
-  return (
-    <Fragment>
-  {isTrue(state__state.processing) ? (
-  <Fragment>
-  <SpinningCircles height={`1em`}/>
-</Fragment>
-) : (
-  <Fragment>
-  <Text>
-  {`Send`}
-</Text>
-</Fragment>
-)}
-</Fragment>
-  )
-}
-
-export function Vstack_54e6360bd542bf11f98509fa51406717 () {
+export function Vstack_0350866e7796ac1875bc06704e94ec67 () {
   const [addEvents, connectError] = useContext(EventLoopContext);
   const state__state = useContext(StateContexts.state__state)
 
@@ -82,23 +48,6 @@ export function Vstack_54e6360bd542bf11f98509fa51406717 () {
   )
 }
 
-export function Formcontrol_b48972261020505866a0e80269cd40ba () {
-  const ref_question = useRef(null); refs['ref_question'] = ref_question;
-  const state__state = useContext(StateContexts.state__state)
-
-
-  return (
-    <FormControl isDisabled={state__state.processing}>
-  <HStack sx={{"alignItems": "center", "justifyContent": "space-between"}}>
-  <Input id={`question`} placeholder={`Ask a research question`} ref={ref_question} sx={{"background": "#222", "borderColor": "#fff3", "borderWidth": "1px", "p": "4", "_placeholder": {"color": "#fffa"}, "_hover": {"borderColor": "#C70039"}}}/>
-  <Button sx={{"background": "#222", "borderColor": "#fff3", "borderWidth": "1px", "p": "4", "_hover": {"background": "#C70039"}, "shadow": "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;", "color": "#fff"}} type={`submit`}>
-  <Fragment_b63270537008a60ad7c622005e3f02ed/>
-</Button>
-</HStack>
-</FormControl>
-  )
-}
-
 export function Closeicon_11ed883525187cdaad471aef955f22dd () {
   const [addEvents, connectError] = useContext(EventLoopContext);
 
@@ -106,6 +55,76 @@ export function Closeicon_11ed883525187cdaad471aef955f22dd () {
 
   return (
     <CloseIcon onClick={on_click_2905983f8758758258aab6a80fcc9a4c} sx={{"fontSize": "md", "color": "#fff8", "_hover": {"color": "#fff"}, "cursor": "pointer", "w": "8"}}/>
+  )
+}
+
+export function Closeicon_c90c6601ae2cde3940fecab2e59b2ad0 () {
+  const [addEvents, connectError] = useContext(EventLoopContext);
+
+  const on_click_e9416bfe015c0fd3bcfc5ccef2e35037 = useCallback((_e) => addEvents([Event("state.state.toggle_modal", {})], (_e), {}), [addEvents, Event])
+
+  return (
+    <CloseIcon onClick={on_click_e9416bfe015c0fd3bcfc5ccef2e35037} sx={{"fontSize": "sm", "color": "#fff8", "_hover": {"color": "#fff"}, "cursor": "pointer"}}/>
+  )
+}
+
+export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
+  const [addEvents, connectError] = useContext(EventLoopContext);
+
+
+  return (
+    <Fragment>
+  {isTrue(connectError !== null) ? (
+  <Fragment>
+  <RadixThemesDialog.Root open={connectError !== null}>
+  <RadixThemesDialog.Content>
+  <RadixThemesDialog.Title>
+  {`Connection Error`}
+</RadixThemesDialog.Title>
+  <RadixThemesText as={`p`}>
+  {`Cannot connect to server: `}
+  {(connectError !== null) ? connectError.message : ''}
+  {`. Check if server is reachable at `}
+  {getBackendURL(env.EVENT).href}
+</RadixThemesText>
+</RadixThemesDialog.Content>
+</RadixThemesDialog.Root>
+</Fragment>
+) : (
+  <Fragment/>
+)}
+</Fragment>
+  )
+}
+
+export function Button_ef632d83b8d318aaed3f9d0b4d4600c6 () {
+  const [addEvents, connectError] = useContext(EventLoopContext);
+
+  const on_click_65775bd3c3ca6de4793090251b518aa6 = useCallback((_e) => addEvents([Event("state.state.create_chat", {})], (_e), {}), [addEvents, Event])
+
+  return (
+    <Button onClick={on_click_65775bd3c3ca6de4793090251b518aa6} sx={{"background": "#5535d4", "boxShadow": "md", "px": "4", "py": "2", "h": "auto", "_hover": {"background": "#4c2db3"}, "shadow": "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;", "color": "#fff"}}>
+  {`Create`}
+</Button>
+  )
+}
+
+export function Box_1814b17ccc133d904756ddae23cea8e0 () {
+  const state__state = useContext(StateContexts.state__state)
+
+
+  return (
+    <Box>
+  {state__state.chats[state__state.current_chat].map((qa, index_039a3707272eee412616d865b653cc2f) => (
+  <Box key={index_039a3707272eee412616d865b653cc2f} sx={{"width": "100%"}}>
+  <Box sx={{"textAlign": "left", "paddingTop": "8em"}}>
+  <Text sx={{"background": "#222", "border": "1px solid", "borderColor": "#fff3", "shadow": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)", "marginLeft": "5em", "display": "inline-block", "p": "4", "borderRadius": "xl", "maxW": "30em"}}>
+  {qa.answer}
+</Text>
+</Box>
+</Box>
+))}
+</Box>
   )
 }
 
@@ -137,25 +156,110 @@ export function Modal_a5f9b941ad9deaf5670339b14b6480af () {
   )
 }
 
-export function Button_ef632d83b8d318aaed3f9d0b4d4600c6 () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
+export function Formcontrol_b48972261020505866a0e80269cd40ba () {
+  const ref_question = useRef(null); refs['ref_question'] = ref_question;
+  const state__state = useContext(StateContexts.state__state)
 
-  const on_click_65775bd3c3ca6de4793090251b518aa6 = useCallback((_e) => addEvents([Event("state.state.create_chat", {})], (_e), {}), [addEvents, Event])
 
   return (
-    <Button onClick={on_click_65775bd3c3ca6de4793090251b518aa6} sx={{"background": "#5535d4", "boxShadow": "md", "px": "4", "py": "2", "h": "auto", "_hover": {"background": "#4c2db3"}, "shadow": "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;", "color": "#fff"}}>
-  {`Create`}
+    <FormControl isDisabled={state__state.processing}>
+  <HStack sx={{"alignItems": "center", "justifyContent": "space-between"}}>
+  <Input id={`question`} placeholder={`Ask a research question`} ref={ref_question} sx={{"background": "#222", "borderColor": "#fff3", "borderWidth": "1px", "p": "4", "_placeholder": {"color": "#fffa"}, "_hover": {"borderColor": "#C70039"}}}/>
+  <Button sx={{"background": "#222", "borderColor": "#fff3", "borderWidth": "1px", "p": "4", "_hover": {"background": "#C70039"}, "shadow": "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;", "color": "#fff"}} type={`submit`}>
+  <Fragment_b63270537008a60ad7c622005e3f02ed/>
 </Button>
+</HStack>
+</FormControl>
   )
 }
 
-export function Closeicon_c90c6601ae2cde3940fecab2e59b2ad0 () {
+export function Box_368d7c856fcd75c8256d2c941fb686fc () {
+  const [addEvents, connectError] = useContext(EventLoopContext);
+
+
+  return (
+    <Box sx={{"position": "fixed", "top": "240px", "right": "0rem", "width": "700px", "maxHeight": "calc(100vh - 120px)", "overflowY": "auto", "paddingBottom": "1rem", "display": isTrue(state__state.submitted) ? `block` : `none`}}>
+  <Box sx={{"backgroundColor": "#222", "color": "#fff", "border": "1px solid", "borderColor": "#fff3", "borderRadius": "var(--chakra-radii-md)", "shadow": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)", "padding": "16px", "width": "70%", "marginBottom": "12px", "height": "auto"}}>
+  <Text sx={{"fontWeight": "bold"}}>
+  {`Chart`}
+</Text>
+  {`Content of the first box`}
+</Box>
+  <Box sx={{"backgroundColor": "#222", "color": "#fff", "border": "1px solid", "borderColor": "#fff3", "borderRadius": "var(--chakra-radii-md)", "shadow": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)", "padding": "16px", "width": "70%", "marginBottom": "12px", "height": "auto"}}>
+  <Text sx={{"fontWeight": "bold"}}>
+  {`Research Gap`}
+</Text>
+  {`Content of the second box`}
+</Box>
+</Box>
+  )
+}
+
+export function Vstack_48cf8d79b2b602d694a649406e7a3f5a () {
+  const state__state = useContext(StateContexts.state__state)
+
+
+  return (
+    <VStack sx={{"py": "8", "flex": "1", "width": "100%", "maxW": "3xl", "paddingInlineStart": "4", "paddingInlineEnd": "4", "alignSelf": "center", "overflow": "auto", "paddingBottom": "5em", "display": isTrue(state__state.submitted) ? `block` : `none`, "alignItems": "stretch", "justifyContent": "space-between"}}>
+  <Box_1814b17ccc133d904756ddae23cea8e0/>
+</VStack>
+  )
+}
+
+export function Box_6ad5ee50aea838e2e82dd27c5f1a78b2 () {
+  const state__state = useContext(StateContexts.state__state)
+
+
+  return (
+    <Box sx={{"position": isTrue(((state__state.submitted) === (true))) ? `fixed` : `absolute`, "top": isTrue(((state__state.submitted) === (true))) ? `0%` : `50%`, "left": isTrue(((state__state.submitted) === (true))) ? `0%` : `50%`, "transform": isTrue(((state__state.submitted) === (true))) ? `` : `translate(-50%, -50%)`, "py": "4", "backdropFilter": "auto", "backdropBlur": "lg", "alignItems": "stretch", "width": "100%"}}>
+  <VStack sx={{"width": "100%", "maxW": "3xl", "mx": "auto", "alignItems": "stretch", "justifyContent": "space-between"}}>
+  <Text sx={{"fontSize": "3xl", "fontWeight": "bold", "color": "#FFFFFF", "textAlign": "center", "width": "100%", "marginBottom": "2em"}}>
+  {`Explore the scientific literature`}
+</Text>
+  <Box_368d7c856fcd75c8256d2c941fb686fc/>
+  <Text sx={{"fontSize": "xs", "color": "#fff6", "textAlign": "center"}}>
+  {`Althea is a research assistant. Use with discretion.`}
+</Text>
+</VStack>
+  <Box_620608ac2582bc6eee69f07b8ff2f4a9/>
+</Box>
+  )
+}
+
+export function Button_cab989f12f0ad9235e6312d2dfd88c7b () {
   const [addEvents, connectError] = useContext(EventLoopContext);
 
   const on_click_e9416bfe015c0fd3bcfc5ccef2e35037 = useCallback((_e) => addEvents([Event("state.state.toggle_modal", {})], (_e), {}), [addEvents, Event])
 
   return (
-    <CloseIcon onClick={on_click_e9416bfe015c0fd3bcfc5ccef2e35037} sx={{"fontSize": "sm", "color": "#fff8", "_hover": {"color": "#fff"}, "cursor": "pointer"}}/>
+    <Button onClick={on_click_e9416bfe015c0fd3bcfc5ccef2e35037} sx={{"background": "#C70039", "px": "4", "py": "2", "h": "auto", "shadow": "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;", "color": "#fff", "_hover": {"background": "#4c2db3"}}}>
+  {`+ New chat`}
+</Button>
+  )
+}
+
+export function Drawer_97f35b88b43e4dff28cc84b566060908 () {
+  const state__state = useContext(StateContexts.state__state)
+
+
+  return (
+    <Drawer isOpen={state__state.drawer_open} placement={`left`}>
+  <DrawerOverlay>
+  <DrawerContent sx={{"background": "#111", "color": "#fff", "opacity": "0.9"}}>
+  <DrawerHeader>
+  <HStack sx={{"alignItems": "center", "justifyContent": "space-between"}}>
+  <Text>
+  {`Research history`}
+</Text>
+  <Closeicon_11ed883525187cdaad471aef955f22dd/>
+</HStack>
+</DrawerHeader>
+  <DrawerBody>
+  <Vstack_0350866e7796ac1875bc06704e94ec67/>
+</DrawerBody>
+</DrawerContent>
+</DrawerOverlay>
+</Drawer>
   )
 }
 
@@ -301,8 +405,12 @@ export default function Component() {
 </HStack>
 </HStack>
 </Box>
-  <Box_fdf2bbb54ac5ea3eca7ccea39b2c159b/>
-  <Drawer_0d0591ac83d9b69304a88ff0099e4e7d/>
+  <Box sx={{"minHeight": "100vh"}}>
+  <Box_6ad5ee50aea838e2e82dd27c5f1a78b2/>
+  <Box_620608ac2582bc6eee69f07b8ff2f4a9/>
+  <Vstack_48cf8d79b2b602d694a649406e7a3f5a/>
+</Box>
+  <Drawer_97f35b88b43e4dff28cc84b566060908/>
   <Modal_a5f9b941ad9deaf5670339b14b6480af/>
 </VStack>
   <NextHead>
