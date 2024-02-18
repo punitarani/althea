@@ -12,13 +12,13 @@ def message(qa: QA) -> rx.Component:
                 border= "1px solid",
                 border_color= "#fff3",
                 shadow= "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+                margin_left="5em",
                 **styles.message_style,
             ),
             text_align="left",
             padding_top="8em",
         ),
         width="100%",
-
     )
 
 def chat() -> rx.Component:
