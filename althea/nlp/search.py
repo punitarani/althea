@@ -1,4 +1,4 @@
-"""althea/nlp/wiki.py"""
+"""althea/nlp/search.py"""
 
 from .client import cohere
 
