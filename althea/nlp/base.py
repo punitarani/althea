@@ -1,7 +1,7 @@
 """althea/nlp/base.py"""
 
-from langchain_community.vectorstores import Pinecone
 from langchain_openai import OpenAIEmbeddings
+from langchain_pinecone import Pinecone
 
 from althea import SECRETS
 from althea.store.vector import pc
