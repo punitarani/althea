@@ -1,12 +1,20 @@
 """althea/nlp/chat.py"""
 
-from .base import vectorstore
+from langchain.chains import RetrievalQA
+from langchain_community.chat_models import ChatCohere
+
+from althea.nlp.base import vectorstore
 
 retriever = vectorstore.as_retriever(k=5)
 
-# TODO: build a chatbot
+chatbot = RetrievalQA.from_chain_type(
+    chain_type="stuff",
+    llm=ChatCohere(temperature=0.25),
+    retriever=vectorstore.as_retriever(search_kwargs=dict(k=10)),
+    return_source_documents=True,
+)
 
-if __name__ == "__main__":
-    query = "What is an amino acid?"
-    docs = vectorstore.similarity_search(query)
-    print(docs)
+
+def chat_answer(question: str) -> str:
+    """Answer a question using the chatbot."""
+    return chatbot.invoke(input=dict(query=question))["result"]
