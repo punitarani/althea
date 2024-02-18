@@ -63,8 +63,8 @@ def query(Input_Q,qabot):
         return qabot.invoke(dict(query=Input_Q))["result"]#return 0 if not related
         
 
-    #if not, return 0
-while True:
-    question = input("Ask a question: ")
-    answer = query(question,qabot)
-    print(answer)
+#     #if not, return 0
+# while True:
+#     question = input("Ask a question: ")
+#     answer = query(question,qabot)
+#     print(answer)
