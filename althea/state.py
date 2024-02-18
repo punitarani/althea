@@ -3,7 +3,7 @@ import os
 
 import reflex as rx
 import requests
-
+from althea.nlp.query import query
 
 
 class QA(rx.Base):
@@ -98,13 +98,16 @@ class State(rx.State):
         question = form_data["question"]
         print (question)
         print (self.submitted)
-
+        response = query(question) 
 
         # Check if the question is empty
         if question == "" or question == None:
             self.submitted = False
             print (question)
             return
+        else:
+            response = query(question) 
+            print (response)
         #if self.api_type == "openai":
         #    model = self.openai_process_question
         #else:
