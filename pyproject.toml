@@ -6,8 +6,24 @@ authors = ["Punit Arani <punitsai36@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.11 <3.13"
+aiolimiter = "^1.1.0"
+cohere = "^4.47"
+langchain = "^0.1.7"
+langchain-experimental = "^0.0.51"
+langchain-openai = "^0.0.6"
+langchain-pinecone = "^0.0.2"
+motor = "^3.3.2"
+openai = "^1.12.0"
+pinecone-client = "^3.0.3"
+pydantic = "<2.0.0"
+pymongo = "^4.6.1"
+pymupdf = "^1.23.22"
+python-dotenv = "^1.0.1"
 reflex = "^0.4.0"
+tenacity = "^8.2.3"
+tiktoken = "^0.6.0"
+tqdm = "^4.66.2"
 
 
 [tool.poetry.group.dev.dependencies]
