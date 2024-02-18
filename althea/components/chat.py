@@ -46,27 +46,63 @@ def chat() -> rx.Component:
         padding_bottom="5em",
     ) 
  """
+ 
+ 
+def boxes_component() -> rx.Component:
+    """Component to render the boxes to the right under the action bar."""
+    box_style = {
+        "background_color": styles.bg_medium_color, 
+        "color": styles.text_light_color,
+        "border_radius": "6px",
+        "shadow": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+        "padding": "16px",
+        "width": "70%",
+        "margin_bottom": "12px", 
+        "height": "auto",
+    }
+
+    boxes_container_style = {
+        "position": "fixed",
+        "top": "240px", 
+        "right": "0rem",
+        "width": "700px", 
+        "max_height": "calc(100vh - 120px)", 
+        "overflow_y": "auto",  
+        "padding_bottom": "1rem", 
+    }
+
+    return rx.chakra.box(
+        rx.chakra.box(
+            rx.chakra.text("Chart", font_weight="bold"),
+            "Content of the first box",
+            **box_style,
+            #top="100%",
+        ),
+        rx.chakra.box(
+            rx.chakra.text("Research Gap", font_weight="bold"),
+            "Content of the second box", 
+            **box_style,
+            #top="calc(100% + 220px)",
+        ),
+        **boxes_container_style,
+        display=rx.cond(State.submitted, "block", "none"),
         
-def cards() -> rx.Component:
-    return rx.card(
-    rx.link(
-        rx.flex(
-            rx.card("Card 1", size="1"),
-            rx.card("Card 2", size="2"),
-            rx.card("Card 3", size="3"),
-            rx.card("Card 4", size="4"),
-            rx.card("Card 5", size="5"),
-            spacing="2",
-            align_items="flex-start",
-            flex_wrap="wrap",
     )
-    ),
-    as_child=True,
-)
+
+
+def layout() -> rx.Component:
+    """The main layout of the application."""
+    return rx.chakra.box(
+        action_bar(),
+        boxes_component(), 
+        min_height="100vh",  
+        #position="relative",
+    )
         
 
 def action_bar() -> rx.Component:
     """The action bar to send a new message."""
+    
     return rx.chakra.box(
         rx.chakra.vstack(
             rx.chakra.text(
@@ -108,7 +144,7 @@ def action_bar() -> rx.Component:
                 width="100%",
             ),
             rx.chakra.text(
-                "Althea is a research agent. Use discretion.",
+                "Althea is a research assistant. Use with discretion.",
                 font_size="xs",
                 color="#fff6",
                 text_align="center",
@@ -117,9 +153,7 @@ def action_bar() -> rx.Component:
             max_w="3xl",
             mx="auto",
         ),
-        
-        #how to access the value of `action_bar_at_top` 
-        #position="absolute",
+        boxes_component(),
         position=rx.cond(
             State.submitted == True, "fixed", "absolute"
         ),
@@ -137,7 +171,6 @@ def action_bar() -> rx.Component:
         py="4",
         backdrop_filter="auto",
         backdrop_blur="lg",
-        # border_top=f"1px solid {styles.border_color}",
         align_items="stretch",
         width="100%",
         #is_open=State.submitted,
