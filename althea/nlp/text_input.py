@@ -12,11 +12,15 @@ from langchain.document_loaders import TextLoader
 # The embedding engine that will convert our text to vectors
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+import openai
+file_path = '/Users/luweitao/Documents/Projects/althea/althea/dataset/txt/10_1002_anie_201206749.txt'
+with open(file_path, 'r', encoding='utf-8') as file:
+    text = file.read()
 
 def read_api_key(api_path):
     with open(api_path, 'r') as file:
         return file.read().strip()
-OPENAI_API_KEY = read_api_key('./API_Key/OPENAI_API_KEY.txt')
+OPENAI_API_KEY = read_api_key('../API_Key/OPENAI_API_KEY.txt')
 os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 
 def embedding_txt(txt):
@@ -40,17 +44,41 @@ def QA(embedded_txt,question,qabot):
 )
     return qabot.invoke(dict(query=question))["result"]#return 0 if not related
 
-async def get_keyworkds(text: str) -> list[str]:
-    """Get the keywords from the scientific literature."""
+def get_keywords(text: str) -> list[str]:
+    """get the keywords from the scientific literature."""
 
-    response = await openai.chat.completions.create(
+    response = openai.chat.completions.create(
+    model="gpt-3.5-turbo-0125",
+    messages=[
+        {"role": "system",
+        "content": "Extract the top 10 keywords and concepts from the scientific literature. They need to be relavant to the overall semantic meaning of the text. Return the keywords in JSON format with a single root node `keywords`"},
+        {"role": "user", "content": text},
+        ],
+    response_format={"type": "json_object"},
+    temperature=0.1,
+    )
+    return json.loads(response.choices[0].message.content).get("keywords", [])
+
+def explain_all_keywords(text: str,keywords:list) -> list[str]:
+    
+    res = []
+    for keyword in keywords:
+        res.append(explain_1_keyword(text,keyword))
+    return res
+
+def explain_1_keyword(text: str,keyword: str) -> list[str]:
+    """Get the keywords from the scientific literature."""
+    response = openai.chat.completions.create(
         model="gpt-3.5-turbo-0125",
         messages=[
             {"role": "system",
-             "content": "Extract the top 10 keywords and concepts from the scientific literature. They need to be relavant to the overall semantic meaning of the text. Return the keywords in JSON format with a single root node `keywords`"},
+             "content": f"Explan the details of keyword {keyword}.They need to be grounded on the paper.In the format: keyword\n explanation\n example(if exist)\n"},
             {"role": "user", "content": text},
         ],
-        response_format={"type": "json_object"},
-        temperature=0.5,
+        temperature=0.1,
     )
-    return json.loads(response.choices[0].message.content).get("keywords", [])
+    return response.choices[0].message.content
+
+kw = get_keywords(text)
+print(kw)
+print(explain_all_keywords(text,kw))
